@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-counters',
@@ -9,12 +9,9 @@ export class CountersComponent implements OnInit {
 
   constructor() { }
 
-  // tslint:disable-next-line:variable-name
-  public show_1 = false;
-  // tslint:disable-next-line:variable-name
-  public show_2 = false;
-  // tslint:disable-next-line:variable-name
-  public show_3 = false;
+  @Input() show1: boolean;
+  @Input() show2: boolean;
+  @Input() show3: boolean;
 
   ngOnInit() {
   }
@@ -22,11 +19,11 @@ export class CountersComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   showInfo(number) {
     switch (number) {
-      case 1 : this.show_1 = true;
+      case 1 : this.show1 = true;
                break;
-      case 2 : this.show_2 = true;
+      case 2 : this.show2 = true;
                break;
-      case 3 : this.show_3 = true;
+      case 3 : this.show3 = true;
                break;
     }
   }
