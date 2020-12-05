@@ -27,6 +27,19 @@ export class AppComponent implements OnInit {
     '"payable":false,"stateMutability":"view","type":"function"}]');
   contractAddress = '0x16eeC86D0eA14d1F14aC9BbDE193F4818a65d971';
 
+  // tslint:disable-next-line:variable-name
+  show_11 = false;
+  // tslint:disable-next-line:variable-name
+  show_12 = false;
+  // tslint:disable-next-line:variable-name
+  show_21 = false;
+  // tslint:disable-next-line:variable-name
+  show_22 = false;
+  // tslint:disable-next-line:variable-name
+  show_31 = false;
+  // tslint:disable-next-line:variable-name
+  show_32 = false;
+
   customers = [
     {
       image: 'factory-1.png',
