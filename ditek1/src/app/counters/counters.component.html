@@ -3,9 +3,9 @@
 </div>
 
 <div>
-  <p>EE {{ee1}} kWt</p>
-  <p>CO2 save {{co1}}</p>
-  <p>Generate {{gen11}} for Client 1</p>
+  <p class="paragraph">EE {{ee1}} kWt</p>
+  <p class="paragraph">CO2 save {{co1}}</p>
+  <p class="paragraph">Generate {{gen11}} for Client 1</p>
   <div *ngIf="!dis1">
     <button (click)="showInfo(11)" disabled>Send 1</button>
   </div>
@@ -13,7 +13,7 @@
     <button (click)="showInfo(11)">Send 1</button>
   </div>
 
-  <p>Generate {{gen21}} for Client 2</p>
+  <p class="paragraph">Generate {{gen21}} for Client 2</p>
 
   <div *ngIf="!dis1">
     <button (click)="showInfo(12)" disabled>Send 2</button>
@@ -29,9 +29,9 @@
 </div>
 
 <div>
-  <p>EE {{ee2}} kWt</p>
-  <p>CO2 save {{co2}}</p>
-  <p>Generate {{gen12}} for Client 1</p>
+  <p class="paragraph">EE {{ee2}} kWt</p>
+  <p class="paragraph">CO2 save {{co2}}</p>
+  <p class="paragraph">Generate {{gen12}} for Client 1</p>
 
 
   <div *ngIf="!dis2">
@@ -40,7 +40,7 @@
   <div *ngIf="dis2">
     <button (click)="showInfo(21)">Send 1</button>
   </div>
-  <p>Generate {{gen22}} for Client 2</p>
+  <p class="paragraph">Generate {{gen22}} for Client 2</p>
 
   <div *ngIf="!dis2">
     <button (click)="showInfo(22)" disabled>Send 2</button>
@@ -56,9 +56,9 @@
 </div>
 
 <div>
-  <p>EE {{ee3}} kWt</p>
-  <p>CO2 save {{co3}}</p>
-  <p>Generate {{gen13}} for Client 1</p>
+  <p class="paragraph">EE {{ee3}} kWt</p>
+  <p class="paragraph">CO2 save {{co3}}</p>
+  <p class="paragraph">Generate {{gen13}} for Client 1</p>
 
   <div *ngIf="!dis3">
     <button (click)="showInfo(31)" disabled>Send 1</button>
@@ -67,7 +67,7 @@
     <button (click)="showInfo(31)">Send 1</button>
   </div>
 
-  <p>Generate {{gen23}} for Client 2</p>
+  <p class="paragraph">Generate {{gen23}} for Client 2</p>
 
   <div *ngIf="!dis3">
     <button (click)="showInfo(32)" disabled>Send 2</button>
