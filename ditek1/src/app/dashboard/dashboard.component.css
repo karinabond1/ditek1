@@ -1,0 +1,15 @@
+.suppliers {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.suppliers .title {
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
+
+.suppliers .supplier {
+  /*border: 1px solid red;*/
+  margin-bottom: 15px;
+}

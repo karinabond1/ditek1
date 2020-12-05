@@ -1,0 +1,14 @@
+.main-container {
+  width: 100%;
+  height: 1000px;
+  /*border: 1px solid aqua;*/
+  display: flex;
+}
+
+.main-container .coll {
+  width: 33%;
+  height: 100%;
+  border-left: 1px solid slategray;
+  border-right: 1px solid slategray;
+  padding: 15px;
+}

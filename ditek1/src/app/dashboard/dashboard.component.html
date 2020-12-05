@@ -1,3 +1,7 @@
-<p>
-  Here is my dashboard
-</p>
+<div class="suppliers">
+  <h1 class="title">Suppliers</h1>
+  <div class="supplier" *ngFor="let customer of customers">
+    <div class="name">{{ customer.name }}</div>
+    <div class="address">{{ customer.address }}</div>
+  </div>
+</div>
