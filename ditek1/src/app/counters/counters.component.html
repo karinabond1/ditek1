@@ -1,11 +1,11 @@
 <div>
   <div *ngFor="let value of counters_info; let i = index" class="blocks">
     <div (click)="countInfo(i)">
-      <img style="width: 70px;" src="/assets/images/vetr.png">
+      <img class="img" src="/assets/images/vetr.png">
     </div>
-    <p class="paragraph">{{value.name}}</p>
-    <p class="paragraph">EE {{value.ee}} kWt</p>
-    <p class="paragraph">CO2 save {{value.co}}</p>
+    <p class="paragraph text">{{value.name}}</p>
+    <p class="paragraph">EE: {{value.ee}} kWt</p>
+    <p class="paragraph">CO2: {{value.co}} save</p>
     <p class="paragraph">Generate {{value.gen1}} for Client 1</p>
     <div *ngIf="!dis[i].dis">
       <button (click)="showInfo(i+11)" disabled>Send 1</button>
