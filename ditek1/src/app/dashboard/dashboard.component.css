@@ -4,12 +4,21 @@
   flex-direction: column;
 }
 
+.suppliers .image {
+  width: 120px;
+}
+
+.suppliers .info-row {
+  display: block;
+  /*flex-direction: row;*/
+}
+
 .suppliers .title {
   margin: 0 auto;
   margin-bottom: 15px;
 }
 
 .suppliers .supplier {
-  /*border: 1px solid red;*/
   margin-bottom: 15px;
+  display: flex;
 }
