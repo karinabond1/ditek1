@@ -8,7 +8,7 @@ import Web3 from 'web3';
 })
 export class AppComponent implements OnInit {
   client = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/a17cf29ba47744768d09f9cbfd0dda1c'));
-  contract = null
+  contract = null;
   abiJson = JSON.parse('[{"constant":false,"inputs":[' +
     '{"internalType":"uint256","name":"el_token","type":"uint256"},' +
     '{"internalType":"uint256","name":"kg_token","type":"uint256"}],' +
@@ -40,6 +40,31 @@ export class AppComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   show_32 = false;
 
+  // tslint:disable-next-line:variable-name
+  counters_info = [
+    {
+      ee: 0,
+      co: 0,
+      gen1: 0,
+      gen2: 0,
+      name: 'Приморская станция'
+    },
+    {
+      ee: 0,
+      co: 0,
+      gen1: 0,
+      gen2: 0,
+      name: 'Запорожская станция'
+    },
+    {
+      ee: 0,
+      co: 0,
+      gen1: 0,
+      gen2: 0,
+      name: 'Ботиевская станция'
+    }
+  ];
+
   customers = [
     {
       image: 'factory-1.png',
@@ -66,7 +91,7 @@ export class AppComponent implements OnInit {
       });
     }
 
-    this.contract.methods.balanceOff('0x8B7f76fde966fAE325Ce75Ce8055f8433297319c').call().then((data) => {
+    this.contract.methods.balanceOff('0x8C7Fd7c3c0f6405FB474Af45588D5b99a7206Af2').call().then((data) => {
       console.log('!!!!!', data);
     });
 
