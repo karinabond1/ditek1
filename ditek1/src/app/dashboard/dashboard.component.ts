@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,12 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  customers = [
-    {name: 'Арматурный завод', address: '0xDb32930e429391c1DC31C570CaAc56f08275ef23'},
-    {name: 'Бетонный завод', address: '0xdb32930e429391c1dc31c570caac56f08275ef23'},
-  ];
+  @Input() customers: object[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
