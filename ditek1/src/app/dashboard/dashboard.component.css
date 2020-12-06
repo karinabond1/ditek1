@@ -22,6 +22,11 @@
 .main-coll .supplier {
   margin-bottom: 15px;
   display: flex;
+  flex-direction: column;
   height: 50vh;
   border-bottom: 2px dashed #755e5e;
 }
+
+/*.product-row {*/
+/*  mar*/
+/*}*/

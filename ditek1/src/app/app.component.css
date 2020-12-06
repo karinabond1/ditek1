@@ -15,3 +15,7 @@
 .main-container .coll.with-border {
   border-right: 2px dashed #755e5e;
 }
+
+.main-coll .title {
+  margin-bottom: 10px;
+}

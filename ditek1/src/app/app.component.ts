@@ -56,6 +56,23 @@ export class AppComponent implements OnInit {
     }
   ];
 
+  factory = [
+    {
+      name: 'Завод железобетонных конструкций',
+      address: '0xEEFC7266B9C64cC09caf68B28b00c86b6F7B85B2',
+      image: 'photo_2020-12-06 15.22.19.jpeg',
+      balance: {cc: 0, co2: 0},
+      products: [
+        {
+          name: 'Железобетонная плита',
+          address: '0xEEFC7266B9C64cC09caf68B28b00c86b6F7B85B2',
+          image: 'photo_2020-12-06 15.23.01.jpeg',
+          balance: {cc: 0, co2: 0}
+        }
+      ]
+    }
+  ];
+
   customers = [
     {
       image: 'factory-1.png',
@@ -65,7 +82,12 @@ export class AppComponent implements OnInit {
       privateKey: '',
       balance: {cc: 0, co2: 0},
       products: [
-        {name: 'Арматура', address: '', image: 'photo_2020-12-06 14.39.12.jpeg', balance: {cc: 0, co2: 0}},
+        {
+          name: 'Арматура',
+          address: '0x7d382968Fa55DAF3d4a2CC52421EaDC13a9FfB5D',
+          image: 'photo_2020-12-06 14.39.12.jpeg',
+          balance: {cc: 0, co2: 0}
+        },
         // {name: 'Бетон', address: '', image: 'photo_2020-12-06 14.39.15.jpeg', balance: {cc: 0, co2: 0}}
       ]
     },
@@ -78,7 +100,12 @@ export class AppComponent implements OnInit {
       balance: {cc: 0, co2: 0},
       products: [
         // {name: 'Арматура', address: '', image: 'photo_2020-12-06 14.39.12.jpeg', balance: {cc: 0, co2: 0}},
-        {name: 'Бетон', address: '', image: 'photo_2020-12-06 14.39.15.jpeg', balance: {cc: 0, co2: 0}}
+        {
+          name: 'Бетон',
+          address: '0x7d382968Fa55DAF3d4a2CC52421EaDC13a9FfB5D',
+          image: 'photo_2020-12-06 14.39.15.jpeg',
+          balance: {cc: 0, co2: 0}
+        }
       ]
     },
   ];
