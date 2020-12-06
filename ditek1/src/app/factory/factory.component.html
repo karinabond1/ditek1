@@ -4,6 +4,7 @@
     <img class="image" [src]='"assets/images/" + customer.image'>
     <div class="info-row">
       <div class="name"><u>{{ customer.name }}</u></div>
+      <div class="address"><i>{{ customer.address.slice(0, 8) }}...{{ customer.address.slice(-7, -1) }}</i></div>
       <br>
       <div class="balance">
         <u><i>Баланс:</i></u>

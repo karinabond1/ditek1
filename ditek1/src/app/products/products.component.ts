@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-products',
@@ -8,6 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class ProductsComponent implements OnInit {
   @Input() factory: object[];
   @Input() client: any;
+  @Output() updateBalances = new EventEmitter<string>();
 
   constructor() {
   }

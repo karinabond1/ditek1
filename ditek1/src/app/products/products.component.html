@@ -5,6 +5,7 @@
       <img class="image" [src]='"assets/images/" + f.image'>
       <div class="info-row" style="margin-left: 10px">
         <div class="name"><u>{{ f.name }}</u></div>
+        <div class="address"><i>{{ f.address.slice(0, 8) }}...{{ f.address.slice(-7, -1) }}</i></div>
         <br>
         <div class="balance">
           <u><i>Баланс:</i></u>
