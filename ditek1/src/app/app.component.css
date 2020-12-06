@@ -9,7 +9,9 @@
 .main-container .coll {
   width: 33%;
   height: 100%;
-  border-left: 1px solid slategray;
-  border-right: 1px solid slategray;
   padding: 10px;
+}
+
+.main-container .coll.with-border {
+  border-right: 2px dashed #755e5e;
 }

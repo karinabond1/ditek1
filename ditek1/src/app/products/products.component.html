@@ -1,0 +1,13 @@
+<div class="main-coll">
+  <h1 class="title">Products</h1>
+  <div class="supplier" style="display: flex; flex-direction: column" *ngFor="let customer of customers">
+    <div class="product" *ngFor="let product of customer.products">
+      <img class="image" [src]='"assets/images/" + product.image'>
+      <div class="info-row">
+        <div class="name">
+          {{ product.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

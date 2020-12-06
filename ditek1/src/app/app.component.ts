@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import Web3 from 'web3';
+
 const abi = require('../contract-abi.json');
 
 @Component({
@@ -14,6 +15,11 @@ export class AppComponent implements OnInit {
   abiJson = abi;
 
   // tslint:disable-next-line:variable-name
+  products = [
+    {name: 'Арматура', address: '', image: 'photo_2020-12-06 14.39.12.jpeg'},
+    {name: 'Бетон', address: '', image: 'photo_2020-12-06 14.39.15.jpeg'}
+  ];
+
   counters_info = [
     {
       greenCoef: 0.95,
@@ -57,7 +63,11 @@ export class AppComponent implements OnInit {
       address: '0xf831195b528C08Ec6823d64C63098079CbeaD5aC',
       pk: '1a9a842cbf37e91f3ced719035f56e1cf12686042ac0e9b9298e376f1c027eab',
       privateKey: '',
-      balance: 0
+      balance: {cc: 0, co2: 0},
+      products: [
+        {name: 'Арматура', address: '', image: 'photo_2020-12-06 14.39.12.jpeg', balance: {cc: 0, co2: 0}},
+        // {name: 'Бетон', address: '', image: 'photo_2020-12-06 14.39.15.jpeg', balance: {cc: 0, co2: 0}}
+      ]
     },
     {
       image: 'factory-2.png',
@@ -65,7 +75,11 @@ export class AppComponent implements OnInit {
       address: '0x7d382968Fa55DAF3d4a2CC52421EaDC13a9FfB5D',
       pk: '2b0759ef63ed593defb5e0c0d990ecf6a6523e02b244c654479d888c57765e27',
       privateKey: '',
-      balance: 0
+      balance: {cc: 0, co2: 0},
+      products: [
+        // {name: 'Арматура', address: '', image: 'photo_2020-12-06 14.39.12.jpeg', balance: {cc: 0, co2: 0}},
+        {name: 'Бетон', address: '', image: 'photo_2020-12-06 14.39.15.jpeg', balance: {cc: 0, co2: 0}}
+      ]
     },
   ];
 
@@ -73,23 +87,18 @@ export class AppComponent implements OnInit {
     this.contract = new this.client.eth.Contract(this.abiJson, this.contractAddress);
 
     for (const index in this.customers) {
-      /*this.client.eth.getBalance(this.customers[index].address).then((data) => {
-        this.customers[index].balance = parseInt(data, 10) / 1e18;
-      });*/
+      this.contract.methods.balanceOff(this.customers[index].address).call()
+        .then(async (data) => {
+          this.customers[index].balance.cc = data[0];
+          this.customers[index].balance.co2 = data[1];
+        });
     }
+
     this.counters_info.forEach((val: any, key: any) => {
       this.contract.methods.balanceOff(val.address).call().then((data) => {
         val.ee = data[0];
         val.co = data[1];
       });
     });
-
-
-
-    // this.client.eth.getBalance('0x8C7Fd7c3c0f6405FB474Af45588D5b99a7206Af2').then((data) => {
-    //   console.log(data / 1e18);
-    // });
-
-
   }
 }

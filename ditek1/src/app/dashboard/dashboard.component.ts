@@ -7,6 +7,7 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
   @Input() customers: object[];
+  @Input() client: any;
 
   constructor() {
   }
