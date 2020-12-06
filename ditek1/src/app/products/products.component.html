@@ -1,11 +1,41 @@
 <div class="main-coll">
-  <h1 class="title">Products</h1>
-  <div class="supplier" style="display: flex; flex-direction: column" *ngFor="let customer of customers">
-    <div class="product" *ngFor="let product of customer.products">
-      <img class="image" [src]='"assets/images/" + product.image'>
-      <div class="info-row">
-        <div class="name">
-          {{ product.name }}
+  <h1 class="title">Factory lvl 2</h1>
+  <div class="supplier" *ngFor="let f of factory">
+    <div style="margin-bottom: 10px; display: flex">
+      <img class="image" [src]='"assets/images/" + f.image'>
+      <div class="info-row" style="margin-left: 10px">
+        <div class="name"><u>{{ f.name }}</u></div>
+        <br>
+        <div class="balance">
+          <u><i>Баланс:</i></u>
+        </div>
+        <div class="balance">
+          {{ f.balance.cc }} kWt h
+        </div>
+        <div class="balance">
+          CO2: {{ f.balance.co2 }} kg
+        </div>
+      </div>
+    </div>
+    <div class="product-row">
+      <u style="display: block; margin-bottom: 10px">Продукция:</u>
+      <div *ngFor="let product of f.products">
+        <img class="image" [src]='"assets/images/" + product.image'>
+        <div class="info-row">
+          <div class="name">
+            {{ product.name }}
+          </div>
+          <div>
+            <u>Партия:</u>
+            {{ product.address.slice(0, 8) }}...{{ product.address.slice(-7, -1) }}
+          </div>
+          <div>
+            <u>Затрачено:</u>
+            <br>
+            {{ product.balance.cc }} kWt h
+            <br>
+            {{ product.balance.co2 }} kg
+          </div>
         </div>
       </div>
     </div>

@@ -6,14 +6,14 @@
                   [customers]="customers">
     </app-counters>
   </div>
-  <div class="coll">
+  <div class="coll with-border">
     <app-dashboard [customers]="customers" [client]="client"></app-dashboard>
   </div>
   <div class="coll with-border">
-    <app-products [customers]="customers" [client]="client"></app-products>
+    <app-products [factory]="factory" [client]="client"></app-products>
   </div>
   <div class="coll">
-    <app-factory></app-factory>
+    <app-factory ></app-factory>
   </div>
 </div>
 
