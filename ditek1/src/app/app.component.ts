@@ -14,10 +14,23 @@ export class AppComponent implements OnInit {
   contract = null;
   abiJson = abi;
 
+  transactions: [
+    {id: '0xff3a811d49caf80c47a71c8ca54088172a0150b5bfc0fc2d4fdbbd28779ce999'},
+    {id: '0xff3a811d49caf80c47a71c8ca54088172a0150b5bfc0fc2d4fdbbd28779ce999'},
+    {id: '0xff3a811d49caf80c47a71c8ca54088172a0150b5bfc0fc2d4fdbbd28779ce999'}
+  ];
   // tslint:disable-next-line:variable-name
   products = [
-    {name: 'Арматура', address: '', image: 'photo_2020-12-06 14.39.12.jpeg'},
-    {name: 'Бетон', address: '', image: 'photo_2020-12-06 14.39.15.jpeg'}
+    {
+      name: 'Арматура',
+      address: '',
+      image: 'photo_2020-12-06 14.39.12.jpeg'
+    },
+    {
+      name: 'Бетон',
+      address: '',
+      image: 'photo_2020-12-06 14.39.15.jpeg'
+    }
   ];
 
   counters_info = [
@@ -60,12 +73,14 @@ export class AppComponent implements OnInit {
     {
       name: 'Завод железобетонных конструкций',
       address: '0xEEFC7266B9C64cC09caf68B28b00c86b6F7B85B2',
+      pk: '',
       image: 'photo_2020-12-06 15.22.19.jpeg',
       balance: {cc: 0, co2: 0},
       products: [
         {
           name: 'Железобетонная плита',
           address: '0xEEFC7266B9C64cC09caf68B28b00c86b6F7B85B2',
+          pk: '',
           image: 'photo_2020-12-06 15.23.01.jpeg',
           balance: {cc: 0, co2: 0}
         }
