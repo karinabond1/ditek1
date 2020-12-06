@@ -14,19 +14,6 @@ export class AppComponent implements OnInit {
   abiJson = abi;
 
   // tslint:disable-next-line:variable-name
-  show_11 = false;
-  // tslint:disable-next-line:variable-name
-  show_12 = false;
-  // tslint:disable-next-line:variable-name
-  show_21 = false;
-  // tslint:disable-next-line:variable-name
-  show_22 = false;
-  // tslint:disable-next-line:variable-name
-  show_31 = false;
-  // tslint:disable-next-line:variable-name
-  show_32 = false;
-
-  // tslint:disable-next-line:variable-name
   counters_info = [
     {
       greenCoef: 0.95,
