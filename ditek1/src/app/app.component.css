@@ -3,6 +3,7 @@
   height: 1000px;
   /*border: 1px solid aqua;*/
   display: flex;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .main-container .coll {

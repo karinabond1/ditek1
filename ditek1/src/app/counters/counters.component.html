@@ -1,7 +1,9 @@
 <div>
   <div *ngFor="let value of counters_info; let i = index" class="blocks">
     <div (click)="countInfo(i)">
-      <img class="img" src="/assets/images/vetr.png">
+      <img *ngIf="i === 0" class="img" src="/assets/images/vetr.png">
+      <img *ngIf="i === 1" class="img" src="/assets/images/solar-panel.jpg">
+      <img *ngIf="i === 2" class="img" src="/assets/images/humster.gif">
     </div>
     <p class="paragraph text">{{value.name}}</p>
     <p class="paragraph">EE: {{value.ee}} kWt</p>

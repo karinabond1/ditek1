@@ -68,10 +68,10 @@ export class CountersComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   // @ts-ignore
   // tslint:disable-next-line:variable-name
-  countInfo(number) {
+   async countInfo(number) {
     this.counters_info.forEach((val: any, key: any) => {
       if ( key === number) {
-        this.contract.methods.balanceOff('0x8C7Fd7c3c0f6405FB474Af45588D5b99a7206Af2').call().then((data) => {
+        this.contract.methods.balanceOff('0x8C7Fd7c3c0f6405FB474Af45588D5b99a7206Af2').call().then(async (data) => {
           console.log('get', data);
           console.log('data[0]', data[0]);
           console.log('data[1]', data[1]);
@@ -83,24 +83,58 @@ export class CountersComponent implements OnInit {
           });*/
           // tslint:disable-next-line:prefer-const
           // TODO
-          let privateKey = new Buffer('e331b6d69882b4cb4ea581d88e0b604039a3de5967688d3dcffdd2270c0fd109', 'hex');
+          const privateKey = new Buffer('b7480e3041bfab6f07f5175a3b097841a89d68f60ffda7a08f0d03ae1697d8c5', 'hex');
           const Tx = require('ethereumjs-tx').Transaction;
-          const rawTx = {
-            nonce: '0x00',
-            gasPrice: '0x09184e72a000',
-            gasLimit: '0x2710',
-            to: '0x8C7Fd7c3c0f6405FB474Af45588D5b99a7206Af2',
+          const gasPrice = await this.client.eth.getGasPrice();
+          const txCount = await this.client.eth.getTransactionCount(this.contractAddress);
+          console.log(txCount);
+
+          let rawTx = {
+            nonce: this.client.utils.toHex(txCount),
+            gasPrice: this.client.utils.toHex(gasPrice),
+            gasLimit: this.client.utils.toHex('30000'),
+            //from: '',
+            from: '0x8C7Fd7c3c0f6405FB474Af45588D5b99a7206Af2',
+            to: this.contractAddress,
             value: '0x00',
             data: this.contract.methods.edit(val.ee, val.co).encodeABI(),
           };
-
+          console.log('1');
           // tslint:disable-next-line:prefer-const
           let tx = new Tx(rawTx);
-          tx.sign(privateKey);
-          const serializedTx = tx.serialize();
-          this.client.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
-            .on('receipt', console.log);
+          //console.log(tx);
 
+          console.log('2');
+
+          let signPromise = await this.client.eth.accounts.signTransaction(tx, privateKey);
+          console.log(signPromise);
+
+          console.log('3');
+          //console.log(tx.sign(rawTx, privateKey));
+          const serializedTx = tx.serialize();
+          console.log('4');
+
+          signPromise.then((signedTx) => {
+            // raw transaction string may be available in .raw or
+            // .rawTransaction depending on which signTransaction
+            // function was called
+            const sentTx = this.client.eth.sendSignedTransaction(signedTx.raw || signedTx.rawTransaction);
+            sentTx.on("receipt", receipt => {
+              console.log(receipt);
+            });
+            sentTx.on("error", err => {
+              console.log(err);
+            });
+          }).catch((err) => {
+            // do something when promise fails
+          });
+
+
+          const receipt = await this.client.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'));
+          console.log('receipt ' + receipt);
+
+          const infobal = await this.contract.methods.balanceOff('0x8C7Fd7c3c0f6405FB474Af45588D5b99a7206Af2').call();
+          console.log(infobal);
           // const privateKey = new Buffer('6d...', 'hex');
 
           /*const rawTransaction = {
