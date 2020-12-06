@@ -26,6 +26,8 @@ export class CountersComponent implements OnInit {
 
   @Input() contractAddress: any;
 
+  @Input() customers: any;
+
   public dis = [
     {
       dis: false
@@ -42,27 +44,42 @@ export class CountersComponent implements OnInit {
   }
 
   // tslint:disable-next-line:variable-name
-  showInfo(number) {
-    switch (number) {
-      case 11 :
-        this.show11 = true;
-        break;
-      case 12 :
-        this.show12 = true;
-        break;
-      case 21 :
-        this.show21 = true;
-        break;
-      case 22 :
-        this.show22 = true;
-        break;
-      case 31:
-        this.show31 = true;
-        break;
-      case 32:
-        this.show32 = true;
-        break;
-    }
+  sendInfo(number, sender_number) {
+    this.counters_info.forEach((val: any, key: any) => {
+      if ( key === number) {
+        this.contract.methods.balanceOff(val.address).call().then(async (data) => {
+          console.log('get', data);
+
+          // tslint:disable-next-line:prefer-const
+          const privateKey = new Buffer(val.pk, 'hex');
+          const Tx = require('ethereumjs-tx').Transaction;
+          const txCount = await this.client.eth.getTransactionCount(val.address);
+
+          const rawTx = {
+            nonce: this.client.utils.toHex(txCount),
+            gasLimit: this.client.utils.toHex(100000),
+            gasPrice: this.client.utils.toHex(60e9), // 10 Gwei
+            from: val.address,
+            to: this.customers[sender_number].address,
+            value: '0x00',
+            data: this.contract.methods.transfer(this.customers[sender_number].address, data[0], data[1]).encodeABI(),
+          };
+          // tslint:disable-next-line:prefer-const
+          let tx = new Tx(rawTx, { chain: 'ropsten' });
+
+          tx.sign(privateKey);
+
+          // let infoo = await this.client.eth.sendSignedTransaction('0x' + tx.serialize().toString('hex'));
+          const hash = await this.waitForHash('0x' + tx.serialize().toString('hex'));
+          console.log(hash);
+          // tslint:disable-next-line:variable-name
+          this.contract.methods.balanceOff(val.address).call().then((data_info) => {
+            console.log('!!!!!', data_info);
+          });
+
+        });
+      }
+    });
   }
 
   // tslint:disable-next-line:variable-name

@@ -7,10 +7,10 @@
         <button (click)="countInfo(i)">Generate</button>
       </div>
       <div>
-        <button (click)="showInfo(i+11)" [disabled]="!dis[i].dis">Send 1</button>
+        <button (click)="sendInfo(i, 0)"> <!--[disabled]="!dis[i].dis"-->Send 1</button>
       </div>
       <div>
-        <button (click)="showInfo(i+12)" [disabled]="!dis[i].dis">Send 2</button>
+        <button (click)="sendInfo(i, 1)"> <!--[disabled]="!dis[i].dis"-->Send 2</button>
       </div>
     </div>
     <div class="right-coll">
@@ -30,10 +30,7 @@
           {{value.co}}
         </span>
         kg
-      </p>
-      <br>
-      <p class="paragraph">Generate {{value.gen1}} for Client 1</p>
-      <p class="paragraph">Generate {{value.gen2}} for Client 2</p>
+      <br><br>
     </div>
   </div>
 </div>
