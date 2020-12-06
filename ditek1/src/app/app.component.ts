@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import Web3 from 'web3';
+
 const abi = require('../contract-abi.json');
 
 @Component({
@@ -14,6 +15,11 @@ export class AppComponent implements OnInit {
   abiJson = abi;
 
   // tslint:disable-next-line:variable-name
+  products = [
+    {name: 'Арматура', address: '', image: 'photo_2020-12-06 14.39.12.jpeg'},
+    {name: 'Бетон', address: '', image: 'photo_2020-12-06 14.39.15.jpeg'}
+  ];
+
   counters_info = [
     {
       greenCoef: 0.95,
@@ -50,14 +56,22 @@ export class AppComponent implements OnInit {
       name: 'ПАО «Славгородский арматурный завод»',
       address: '0x8C7Fd7c3c0f6405FB474Af45588D5b99a7206Af2',
       privateKey: '',
-      balance: 0
+      balance: {cc: 0, co2: 0},
+      products: [
+        {name: 'Арматура', address: '', image: 'photo_2020-12-06 14.39.12.jpeg', balance: {cc: 0, co2: 0}},
+        // {name: 'Бетон', address: '', image: 'photo_2020-12-06 14.39.15.jpeg', balance: {cc: 0, co2: 0}}
+      ]
     },
     {
       image: 'factory-2.png',
       name: 'Бетонный завод',
       address: '0x8B7f76fde966fAE325Ce75Ce8055f8433297319c',
       privateKey: '',
-      balance: 0
+      balance: {cc: 0, co2: 0},
+      products: [
+        // {name: 'Арматура', address: '', image: 'photo_2020-12-06 14.39.12.jpeg', balance: {cc: 0, co2: 0}},
+        {name: 'Бетон', address: '', image: 'photo_2020-12-06 14.39.15.jpeg', balance: {cc: 0, co2: 0}}
+      ]
     },
   ];
 
@@ -65,9 +79,11 @@ export class AppComponent implements OnInit {
     this.contract = new this.client.eth.Contract(this.abiJson, this.contractAddress);
 
     for (const index in this.customers) {
-      this.client.eth.getBalance(this.customers[index].address).then((data) => {
-        this.customers[index].balance = parseInt(data, 10) / 1e18;
-      });
+      this.contract.methods.balanceOff(this.customers[index].address).call()
+        .then(async (data) => {
+          this.customers[index].balance.cc = data[0];
+          this.customers[index].balance.co2 = data[1];
+        });
     }
 
     this.contract.methods.balanceOff('0x8C7Fd7c3c0f6405FB474Af45588D5b99a7206Af2').call().then((data) => {

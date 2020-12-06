@@ -1,15 +1,18 @@
 <div class="main-container">
-  <div class="coll">
-    <app-counters [counters_info]="counters_info" [contract]="contract" [client]="client" [contractAddress]="contractAddress"></app-counters>
+  <div class="coll with-border">
+    <app-counters [counters_info]="counters_info"
+                  [contract]="contract" [client]="client"
+                  [contractAddress]="contractAddress">
+    </app-counters>
   </div>
   <div class="coll">
-    <app-dashboard [customers]="customers"></app-dashboard>
+    <app-dashboard [customers]="customers" [client]="client"></app-dashboard>
+  </div>
+  <div class="coll with-border">
+    <app-products [customers]="customers" [client]="client"></app-products>
   </div>
   <div class="coll">
-    Last column
-  </div>
-  <div class="coll">
-    Last column
+    <app-factory></app-factory>
   </div>
 </div>
 
