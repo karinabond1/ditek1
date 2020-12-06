@@ -41,6 +41,15 @@ export class CountersComponent implements OnInit {
   ];
 
   ngOnInit() {
+    this.counters_info.forEach((val: any, key: any) => {
+      this.contract.methods.balanceOff(val.address).call().then((data) => {
+        val.ee = data[0];
+        val.co = data[1];
+        if ( val.ee > 0 && val.co > 0) {
+          this.dis[key].dis = true;
+        }
+      });
+    });
   }
 
   // tslint:disable-next-line:variable-name
@@ -49,7 +58,8 @@ export class CountersComponent implements OnInit {
       if ( key === number) {
         this.dis[key].dis = false;
         this.contract.methods.balanceOff(val.address).call().then(async (data) => {
-          console.log('get', data);
+          console.log('get', data[0]);
+          console.log(this.customers[sender_number].address);
 
           // tslint:disable-next-line:prefer-const
           const privateKey = new Buffer(val.pk, 'hex');
@@ -59,11 +69,13 @@ export class CountersComponent implements OnInit {
           const rawTx = {
             nonce: this.client.utils.toHex(txCount),
             gasLimit: this.client.utils.toHex(100000),
-            gasPrice: this.client.utils.toHex(60e9), // 10 Gwei
+            gasPrice: this.client.utils.toHex(35e9), // 10 Gwei
             from: val.address,
-            to: this.customers[sender_number].address,
+            to: this.contractAddress,
             value: '0x00',
-            data: this.contract.methods.transfer(this.customers[sender_number].address, 10, 5).encodeABI(),
+            // tslint:disable-next-line:radix max-line-length
+            data: this.contract.methods.transfer(this.customers[sender_number].address.toString(), parseInt(data[0]), parseInt(data[1])).encodeABI(),
+            // chainId: 8888
           };
           // tslint:disable-next-line:prefer-const
           let tx = new Tx(rawTx, { chain: 'ropsten' });
@@ -90,6 +102,7 @@ export class CountersComponent implements OnInit {
     this.counters_info.forEach((val: any, key: any) => {
       if ( key === number) {
         this.contract.methods.balanceOff(val.address).call().then(async (data) => {
+          this.dis[key].dis = false;
           const randomNumber = Math.round((Math.random() * 10) + 1);
           console.log('get', data);
           console.log('randomNumber', randomNumber);
