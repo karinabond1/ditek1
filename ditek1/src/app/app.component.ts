@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
       name: 'Запорожская станция',
       image: 'solar-panel.jpg',
       address: '0x8B7f76fde966fAE325Ce75Ce8055f8433297319c',
-      pk: ''
+      pk: 'baf01ea5c8c013269bf0e4f34478641a1dc7d685e0c5a0292ae245af30d804bf'
     },
     {
       greenCoef: 0.7,
@@ -83,6 +83,7 @@ export class AppComponent implements OnInit {
         val.co = data[1];
       });
     });
+
 
 
     // this.client.eth.getBalance('0x8C7Fd7c3c0f6405FB474Af45588D5b99a7206Af2').then((data) => {
