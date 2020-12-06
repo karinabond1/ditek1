@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import Web3 from 'web3';
+const abi = require('../contract-abi.json');
 
 @Component({
   selector: 'app-root',
@@ -8,47 +9,38 @@ import Web3 from 'web3';
 })
 export class AppComponent implements OnInit {
   client = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/a17cf29ba47744768d09f9cbfd0dda1c'));
-  contract = null;
-  abiJson = JSON.parse('[{"constant":false,"inputs":[' +
-    '{"internalType":"uint256","name":"el_token","type":"uint256"},' +
-    '{"internalType":"uint256","name":"kg_token","type":"uint256"}],' +
-    '"name":"edit","outputs":[{"internalType":"uint256","name":"","type":"uint256"},' +
-    '{"internalType":"uint256","name":"","type":"uint256"}],' +
-    '"payable":false,"stateMutability":"nonpayable","type":"function"},' +
-    '{"constant":false,"inputs":[{"internalType":"address","name":"_reciver","type":"address"},' +
-    '{"internalType":"uint256","name":"el_token","type":"uint256"},' +
-    '{"internalType":"uint256","name":"kg_token","type":"uint256"}],' +
-    '"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],' +
-    '"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],' +
-    '"payable":false,"stateMutability":"nonpayable","type":"constructor"},' +
-    '{"constant":true,"inputs":[{"internalType":"address","name":"_addr","type":"address"}],' +
-    '"name":"balanceOff","outputs":[{"internalType":"uint256","name":"","type":"uint256"},' +
-    '{"internalType":"uint256","name":"","type":"uint256"}],' +
-    '"payable":false,"stateMutability":"view","type":"function"}]');
   contractAddress = '0x16eeC86D0eA14d1F14aC9BbDE193F4818a65d971';
+  contract = null;
+  abiJson = abi;
 
   // tslint:disable-next-line:variable-name
   counters_info = [
     {
+      greenCoef: 0.95,
       ee: 0,
       co: 0,
       gen1: 0,
       gen2: 0,
-      name: 'Приморская станция'
+      name: 'Приморская станция',
+      image: 'vetr.png'
     },
     {
+      greenCoef: 0.85,
       ee: 0,
       co: 0,
       gen1: 0,
       gen2: 0,
-      name: 'Запорожская станция'
+      name: 'Запорожская станция',
+      image: 'solar-panel.jpg'
     },
     {
+      greenCoef: 0.7,
       ee: 0,
       co: 0,
       gen1: 0,
       gen2: 0,
-      name: 'Ботиевская станция'
+      name: 'Ботиевская станция',
+      image: 'humster.gif'
     }
   ];
 

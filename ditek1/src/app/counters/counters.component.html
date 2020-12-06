@@ -1,28 +1,39 @@
-<div>
+<div class="main-coll">
+  <h1 class="title">Producers</h1>
   <div *ngFor="let value of counters_info; let i = index" class="blocks">
-    <div (click)="countInfo(i)">
-      <img *ngIf="i === 0" class="img" src="/assets/images/vetr.png">
-      <img *ngIf="i === 1" class="img" src="/assets/images/solar-panel.jpg">
-      <img *ngIf="i === 2" class="img" src="/assets/images/humster.gif">
+    <div class="left-coll">
+      <img class="img" [src]="'/assets/images/' + value.image">
+      <div>
+        <button (click)="countInfo(i)">Generate</button>
+      </div>
+      <div>
+        <button (click)="showInfo(i+11)" [disabled]="!dis[i].dis">Send 1</button>
+      </div>
+      <div>
+        <button (click)="showInfo(i+12)" [disabled]="!dis[i].dis">Send 2</button>
+      </div>
     </div>
-    <p class="paragraph text">{{value.name}}</p>
-    <p class="paragraph">EE: {{value.ee}} kWt</p>
-    <p class="paragraph">CO2: {{value.co}} save</p>
-    <p class="paragraph">Generate {{value.gen1}} for Client 1</p>
-    <div *ngIf="!dis[i].dis">
-      <button (click)="showInfo(i+11)" disabled>Send 1</button>
-    </div>
-    <div *ngIf="dis[i].dis">
-      <button (click)="showInfo(i+11)">Send 1</button>
-    </div>
-
-    <p class="paragraph">Generate {{value.gen2}} for Client 2</p>
-
-    <div *ngIf="!dis[i].dis">
-      <button (click)="showInfo(i+12)" disabled>Send 2</button>
-    </div>
-    <div *ngIf="dis[i].dis">
-      <button (click)="showInfo(i+12)">Send 2</button>
+    <div class="right-coll">
+      <p class="paragraph text">{{value.name}}</p>
+      <p class="paragraph" style="color: dimgray">Coef CO2 avoid <b style="color: black">{{value.greenCoef}}</b> kg / kWt h</p>
+      <br>
+      <p class="paragraph">
+        <b style="min-width: 170px; display: inline-block">Generated Electric:</b>
+        <span style="min-width: 30px; display: inline-block">
+          {{value.ee}}
+        </span>
+        kWt
+      </p>
+      <p class="paragraph">
+        <b style="min-width: 170px; display: inline-block">CO2 saved:</b>
+        <span style="min-width: 30px; display: inline-block">
+          {{value.co}}
+        </span>
+        kg
+      </p>
+      <br>
+      <p class="paragraph">Generate {{value.gen1}} for Client 1</p>
+      <p class="paragraph">Generate {{value.gen2}} for Client 2</p>
     </div>
   </div>
 </div>
