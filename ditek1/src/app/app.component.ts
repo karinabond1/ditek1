@@ -14,11 +14,7 @@ export class AppComponent implements OnInit {
   contract = null;
   abiJson = abi;
 
-  transactions: [
-    {id: '0xff3a811d49caf80c47a71c8ca54088172a0150b5bfc0fc2d4fdbbd28779ce999'},
-    {id: '0xff3a811d49caf80c47a71c8ca54088172a0150b5bfc0fc2d4fdbbd28779ce999'},
-    {id: '0xff3a811d49caf80c47a71c8ca54088172a0150b5bfc0fc2d4fdbbd28779ce999'}
-  ];
+  tx = [];
   // tslint:disable-next-line:variable-name
   products = [
     {
@@ -126,6 +122,10 @@ export class AppComponent implements OnInit {
       ]
     },
   ];
+
+  addTransaction($event) {
+    this.tx.push($event.hash);
+  }
 
   updateBalances() {
     this.customers.forEach((val: any, key: any) => {

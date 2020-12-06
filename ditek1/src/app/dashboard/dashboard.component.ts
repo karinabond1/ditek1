@@ -9,6 +9,7 @@ export class DashboardComponent implements OnInit {
   @Input() customers: object[];
   @Input() client: any;
   @Output() updateBalances = new EventEmitter<string>();
+  @Output() addTransaction = new EventEmitter<string>();
 
   constructor() {
   }

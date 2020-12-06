@@ -1,9 +1,11 @@
 <div class="main-coll">
   <h1 class="title">Transactions</h1>
   <div>
-    {{ transactions }}
-    <div class="transactions" *ngFor="let tx of transactions">
-      <p>{{tx}}</p>
+    <div class="transactions" *ngFor="let t of tx; let i = index">
+      Транзакция {{ i + 1 }} -
+      <a [href]="'https://ropsten.etherscan.io/tx/' + t" target="_blank">
+        {{t.slice(0, 10)}} ... {{ t.slice(-10, -1) }}
+      </a>
     </div>
   </div>
 </div>

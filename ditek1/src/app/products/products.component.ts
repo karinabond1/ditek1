@@ -9,6 +9,7 @@ export class ProductsComponent implements OnInit {
   @Input() factory: object[];
   @Input() client: any;
   @Output() updateBalances = new EventEmitter<string>();
+  @Output() addTransaction = new EventEmitter<string>();
 
   constructor() {
   }
