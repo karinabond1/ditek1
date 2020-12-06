@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
 import {TxData} from 'ethereumjs-tx';
 
 @Component({
@@ -10,6 +10,7 @@ export class CountersComponent implements OnInit {
 
   constructor() { }
 
+  @Output() updateBalances = new EventEmitter<string>();
   @Input() show11: boolean;
   @Input() show12: boolean;
   @Input() show21: boolean;
@@ -138,11 +139,11 @@ export class CountersComponent implements OnInit {
           resolve(hash);
         })
         .on('receipt', (receipt) => {
+          console.log('Added to block');
           this.dis[key].dis = true;
           // tslint:disable-next-line:variable-name
           this.contract.methods.balanceOff(this.counters_info[key].address).call().then((data_info) => {
-            this.counters_info[key].ee = data_info[0];
-            this.counters_info[key].co = data_info[1];
+            this.updateBalances.next('updateBalances');
           });
         });
     });

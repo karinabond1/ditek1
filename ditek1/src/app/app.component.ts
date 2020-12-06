@@ -87,7 +87,8 @@ export class AppComponent implements OnInit {
           address: '0x5e0969AF56c476CB1CCAf40dA094F849a3C2e2A0',
           pk: '890262bb7fcd46db8343140f5b130cd407f4cb6ee354138cbd8f9a3349135e3c',
           image: 'photo_2020-12-06 14.39.12.jpeg',
-          balance: {cc: 0, co2: 0}},
+          balance: {cc: 0, co2: 0}
+        },
         // {name: 'Бетон', address: '', image: 'photo_2020-12-06 14.39.15.jpeg', balance: {cc: 0, co2: 0}}
       ]
     },
@@ -105,21 +106,38 @@ export class AppComponent implements OnInit {
           address: '0xB1a0B608C668570eE4F877298063EaDA9C0F991B',
           pk: '6e22cf3bea2555fd5bf6fcb979f5288fa445ea1d208d330622ae588a6a57717c',
           image: 'photo_2020-12-06 14.39.15.jpeg',
-          balance: {cc: 0, co2: 0}}
+          balance: {cc: 0, co2: 0}
+        }
       ]
     },
   ];
 
-  ngOnInit() {
-    this.contract = new this.client.eth.Contract(this.abiJson, this.contractAddress);
-
-    for (const index in this.customers) {
-      this.contract.methods.balanceOff(this.customers[index].address).call()
-        .then(async (data) => {
-          this.customers[index].balance.cc = data[0];
-          this.customers[index].balance.co2 = data[1];
+  updateBalances() {
+    this.customers.forEach((val: any, key: any) => {
+      this.contract.methods.balanceOff(val.address).call().then((data) => {
+        val.balance.cc = data[0];
+        val.balance.co2 = data[1];
+      });
+      val.products.forEach((_val: any, _key: any) => {
+        this.contract.methods.balanceOff(val.address).call().then((_data) => {
+          _val.balance.cc = _data[0];
+          _val.balance.co2 = _data[1];
         });
-    }
+      });
+    });
+
+    this.factory.forEach((val: any, key: any) => {
+      this.contract.methods.balanceOff(val.address).call().then((data) => {
+        val.balance.cc = data[0];
+        val.balance.co2 = data[1];
+      });
+      val.products.forEach((_val: any, _key: any) => {
+        this.contract.methods.balanceOff(val.address).call().then((_data) => {
+          _val.balance.cc = _data[0];
+          _val.balance.co2 = _data[1];
+        });
+      });
+    });
 
     this.counters_info.forEach((val: any, key: any) => {
       this.contract.methods.balanceOff(val.address).call().then((data) => {
@@ -127,5 +145,11 @@ export class AppComponent implements OnInit {
         val.co = data[1];
       });
     });
+  }
+
+  ngOnInit() {
+    this.contract = new this.client.eth.Contract(this.abiJson, this.contractAddress);
+
+    this.updateBalances();
   }
 }

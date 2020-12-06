@@ -3,17 +3,22 @@
     <app-counters [counters_info]="counters_info"
                   [contract]="contract" [client]="client"
                   [contractAddress]="contractAddress"
-                  [customers]="customers">
+                  [customers]="customers"
+                  (updateBalances)="updateBalances()">
     </app-counters>
   </div>
   <div class="coll with-border">
-    <app-dashboard [customers]="customers" [client]="client"></app-dashboard>
+    <app-dashboard [customers]="customers"
+                   [client]="client"
+                   (updateBalances)="updateBalances()"></app-dashboard>
   </div>
   <div class="coll with-border">
-    <app-products [factory]="factory" [client]="client"></app-products>
+    <app-products [factory]="factory"
+                  [client]="client"
+                  (updateBalances)="updateBalances()"></app-products>
   </div>
   <div class="coll">
-    <app-factory ></app-factory>
+    <app-factory></app-factory>
   </div>
 </div>
 
