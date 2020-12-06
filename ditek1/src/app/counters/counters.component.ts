@@ -71,7 +71,7 @@ export class CountersComponent implements OnInit {
    async countInfo(number) {
     this.counters_info.forEach((val: any, key: any) => {
       if ( key === number) {
-        this.contract.methods.balanceOff('0x8C7Fd7c3c0f6405FB474Af45588D5b99a7206Af2').call().then(async (data) => {
+        this.contract.methods.balanceOff('0x8B7f76fde966fAE325Ce75Ce8055f8433297319c').call().then(async (data) => {
           console.log('get', data);
           console.log('data[0]', data[0]);
           console.log('data[1]', data[1]);
@@ -82,29 +82,66 @@ export class CountersComponent implements OnInit {
             console.log('change', dataEdit);
           });*/
           // tslint:disable-next-line:prefer-const
-          // TODO
           const privateKey = new Buffer('b7480e3041bfab6f07f5175a3b097841a89d68f60ffda7a08f0d03ae1697d8c5', 'hex');
           const Tx = require('ethereumjs-tx').Transaction;
           const gasPrice = await this.client.eth.getGasPrice();
           const txCount = await this.client.eth.getTransactionCount(this.contractAddress);
           console.log(txCount);
 
-          let rawTx = {
+          const rawTx = {
             nonce: this.client.utils.toHex(txCount),
-            gasPrice: this.client.utils.toHex(gasPrice),
-            gasLimit: this.client.utils.toHex('30000'),
-            //from: '',
-            from: '0x8C7Fd7c3c0f6405FB474Af45588D5b99a7206Af2',
+            // gasPrice: this.client.utils.toHex(gasPrice),
+            // gasLimit: this.client.utils.toHex('30000'),
+            gasLimit: this.client.utils.toHex(70000),
+            gasPrice: this.client.utils.toHex(60e9), // 10 Gwei
+            // from: '',
+            from: '0x8B7f76fde966fAE325Ce75Ce8055f8433297319c',
             to: this.contractAddress,
-            value: '0x00',
+            // value: '0x00',
             data: this.contract.methods.edit(val.ee, val.co).encodeABI(),
           };
+          const infobal = await this.contract.methods.balanceOff('0x8B7f76fde966fAE325Ce75Ce8055f8433297319c').call();
           console.log('1');
           // tslint:disable-next-line:prefer-const
-          let tx = new Tx(rawTx);
-          //console.log(tx);
+          let tx = new Tx(rawTx, { chain: 'ropsten' });
+          // console.log(tx);
 
           console.log('2');
+          tx.sign(privateKey);
+          console.log('3');
+          // let serializedTx = tx.serialize().toString('hex');
+          console.log('0x' + tx.serialize().toString('hex'));
+
+          // let infoo = await this.client.eth.sendSignedTransaction('0x' + tx.serialize().toString('hex'));
+          const hash = await this.waitForHash('0x' + tx.serialize().toString('hex'));
+          console.log(hash);
+          console.log('4');
+
+
+
+          /*this.client.eth.sendSignedTransaction('0x' + serializedTx, function (err, txHash) {
+
+            if (txHash) {
+
+              console.log(txHash);
+
+            }
+
+            else if (err && err.message) {
+
+              console.log(err.message);
+
+            }
+
+            else {
+
+              console.log('Unable to sendRawTransaction');
+
+            }
+
+          });*/
+
+          /*console.log('2');
 
           let signPromise = await this.client.eth.accounts.signTransaction(tx, privateKey);
           console.log(signPromise);
@@ -134,7 +171,7 @@ export class CountersComponent implements OnInit {
           console.log('receipt ' + receipt);
 
           const infobal = await this.contract.methods.balanceOff('0x8C7Fd7c3c0f6405FB474Af45588D5b99a7206Af2').call();
-          console.log(infobal);
+          console.log(infobal);*/
           // const privateKey = new Buffer('6d...', 'hex');
 
           /*const rawTransaction = {
@@ -149,6 +186,15 @@ export class CountersComponent implements OnInit {
           transaction.sign(privateKey);*/
         });
       }
+    });
+  }
+
+ waitForHash(signedTx) {
+    return new Promise((resolve, reject) => {
+      this.client.eth.sendSignedTransaction(signedTx)
+        .once('transactionHash', (hash) => {
+          resolve(hash);
+        });
     });
   }
 }
