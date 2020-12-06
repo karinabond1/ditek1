@@ -36,6 +36,15 @@
             {{ product.balance.cc }} kWt h
             <br>
             {{ product.balance.co2 }} kg
+          </div><br>
+          <div>
+            <button (click)="sendInfo(0)"> <!--[disabled]="!dis[i].dis">-->Забрать арматуру</button>
+          </div><br>
+          <div>
+            <button (click)="sendInfo(1)"> <!--[disabled]="!dis[i].dis">-->Забрать бетон</button>
+          </div>
+          <div><br>
+            <button (click)="sendInfoTwo(0)"> <!--[disabled]="!dis[i].dis">-->Забрать с завода</button>
           </div>
         </div>
       </div>

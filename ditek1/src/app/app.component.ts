@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
       gen2: 0,
       name: 'Ботиевская станция',
       image: 'solar-panel.jpg',
-      address: '0xEEFC7266B9C64cC09caf68B28b00c86b6F7B85B2',
+      address: '0x994C6cC44D052f0580223add515845F0F4F15894',
       pk: 'd3ff8376ef8f1ff24623698b3d3e88712ef02ef7b90823a4147241f759e19138',
     }
   ];
@@ -61,13 +61,15 @@ export class AppComponent implements OnInit {
       name: 'Завод железобетонных конструкций',
       address: '0xEEFC7266B9C64cC09caf68B28b00c86b6F7B85B2',
       image: 'photo_2020-12-06 15.22.19.jpeg',
+      pk: 'd3ff8376ef8f1ff24623698b3d3e88712ef02ef7b90823a4147241f759e19138',
       balance: {cc: 0, co2: 0},
       products: [
         {
           name: 'Железобетонная плита',
-          address: '0xEEFC7266B9C64cC09caf68B28b00c86b6F7B85B2',
+          address: '0x44Ced9f51e87403e8C6ee2C668410213Fd0D7C66',
           image: 'photo_2020-12-06 15.23.01.jpeg',
-          balance: {cc: 0, co2: 0}
+          balance: {cc: 0, co2: 0},
+          pk: '04e863c91cd1ec404aa7608bb32e52fbe996e03af1e957b6e5af8c20834206f0'
         }
       ]
     }
@@ -110,6 +112,22 @@ export class AppComponent implements OnInit {
         }
       ]
     },
+    {
+      name: 'Завод железобетонных конструкций',
+      address: '0xEEFC7266B9C64cC09caf68B28b00c86b6F7B85B2',
+      image: 'photo_2020-12-06 15.22.19.jpeg',
+      pk: 'd3ff8376ef8f1ff24623698b3d3e88712ef02ef7b90823a4147241f759e19138',
+      balance: {cc: 0, co2: 0},
+      products: [
+        {
+          name: 'Железобетонная плита',
+          address: '0x44Ced9f51e87403e8C6ee2C668410213Fd0D7C66',
+          image: 'photo_2020-12-06 15.23.01.jpeg',
+          balance: {cc: 0, co2: 0},
+          pk: '04e863c91cd1ec404aa7608bb32e52fbe996e03af1e957b6e5af8c20834206f0'
+        }
+      ]
+    }
   ];
 
   updateBalances() {
@@ -118,12 +136,16 @@ export class AppComponent implements OnInit {
         val.balance.cc = data[0];
         val.balance.co2 = data[1];
       });
-      val.products.forEach((_val: any, _key: any) => {
+      this.contract.methods.balanceOff(val.products[0].address).call().then((data_two) => {
+        val.products[0].balance.cc = data_two[0];
+        val.products[0].balance.co2 = data_two[1];
+      });
+      /*val.products.forEach((_val: any, _key: any) => {
         this.contract.methods.balanceOff(val.address).call().then((_data) => {
           _val.balance.cc = _data[0];
           _val.balance.co2 = _data[1];
         });
-      });
+      });*/
     });
 
     this.factory.forEach((val: any, key: any) => {
@@ -131,12 +153,17 @@ export class AppComponent implements OnInit {
         val.balance.cc = data[0];
         val.balance.co2 = data[1];
       });
-      val.products.forEach((_val: any, _key: any) => {
+      this.contract.methods.balanceOff(val.products[0].address).call().then((data_two) => {
+        val.products[0].balance.cc = data_two[0];
+        val.products[0].balance.co2 = data_two[1];
+      });
+
+      /*val.products.forEach((_val: any, _key: any) => {
         this.contract.methods.balanceOff(val.address).call().then((_data) => {
           _val.balance.cc = _data[0];
           _val.balance.co2 = _data[1];
         });
-      });
+      });*/
     });
 
     this.counters_info.forEach((val: any, key: any) => {

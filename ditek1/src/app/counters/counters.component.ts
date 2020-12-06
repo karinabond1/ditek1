@@ -69,8 +69,8 @@ export class CountersComponent implements OnInit {
 
           const rawTx = {
             nonce: this.client.utils.toHex(txCount),
-            gasLimit: this.client.utils.toHex(100000),
-            gasPrice: this.client.utils.toHex(35e9), // 10 Gwei
+            gasLimit: this.client.utils.toHex(200000),
+            gasPrice: this.client.utils.toHex(60e9), // 10 Gwei
             from: val.address,
             to: this.contractAddress,
             value: '0x00',

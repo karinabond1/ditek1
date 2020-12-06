@@ -1,7 +1,7 @@
 <div class="main-coll">
   <h1 class="title">Factory lvl 1</h1>
-  <div class="supplier" *ngFor="let customer of customers">
-    <div style="margin-bottom: 10px; display: flex">
+  <div class="supplier" *ngFor="let customer of customers; let i = index;">
+    <div *ngIf="i < 2" style="margin-bottom: 10px; display: flex">
       <img class="image" [src]='"assets/images/" + customer.image'>
       <div class="info-row">
         <div class="name"><u>{{ customer.name }}</u></div>
@@ -16,9 +16,12 @@
         <div class="balance">
           CO2: {{ customer.balance.co2 }} kg
         </div>
+        <div>
+          <button (click)="sendInfo(i, 1)"> <!--[disabled]="!dis[i].dis">-->Производство товара</button>
+        </div>
       </div>
     </div>
-    <div class="product-row">
+    <div *ngIf="i < 2" class="product-row">
       <u style="display: block; margin-bottom: 10px">Продукция:</u>
       <div *ngFor="let product of customer.products">
         <img class="image" [src]='"assets/images/" + product.image'>

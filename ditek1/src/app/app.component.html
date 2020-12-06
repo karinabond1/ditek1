@@ -10,11 +10,18 @@
   <div class="coll with-border">
     <app-dashboard [customers]="customers"
                    [client]="client"
+                   [contract]="contract"
+                   [client]="client"
+                   [contractAddress]="contractAddress"
                    (updateBalances)="updateBalances()"></app-dashboard>
   </div>
   <div class="coll with-border">
     <app-products [factory]="factory"
+                  [customers]="customers"
                   [client]="client"
+                  [contract]="contract"
+                  [contractAddress]="contractAddress"
+                  (updateBalances)="updateBalances()"
                   (updateBalances)="updateBalances()"></app-products>
   </div>
   <div class="coll">
