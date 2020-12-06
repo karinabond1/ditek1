@@ -1,24 +1,24 @@
-.suppliers {
+.main-coll {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.suppliers .image {
+.main-coll .image {
   width: 120px;
 }
 
-.suppliers .info-row {
+.main-coll .info-row {
   display: block;
   /*flex-direction: row;*/
 }
 
-.suppliers .title {
+.main-coll .title {
   margin: 0 auto;
   margin-bottom: 15px;
 }
 
-.suppliers .supplier {
+.main-coll .supplier {
   margin-bottom: 15px;
   display: flex;
 }

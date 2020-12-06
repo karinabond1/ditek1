@@ -4,6 +4,17 @@
 
 .blocks{
   margin: 0 0 20px 0;
+  display: flex;
+}
+
+.blocks .left-coll {
+  display: inline-block;
+  text-align: center;
+}
+
+button {
+  width: 90px;
+  margin: 5px 10px;
 }
 
 .text{
@@ -13,3 +24,29 @@
 .img{
   width: 90px;
 }
+
+.main-coll {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-coll .image {
+  width: 120px;
+}
+
+.main-coll .info-row {
+  display: block;
+  /*flex-direction: row;*/
+}
+
+.main-coll .title {
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
+
+.main-coll .supplier {
+  margin-bottom: 15px;
+  display: flex;
+}
+
