@@ -19,3 +19,8 @@
 .main-coll .title {
   margin-bottom: 10px;
 }
+
+.balance {
+  border: 1px solid red;
+  background: red;
+}

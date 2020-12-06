@@ -69,7 +69,6 @@ export class AppComponent implements OnInit {
     {
       name: 'Завод железобетонных конструкций',
       address: '0xEEFC7266B9C64cC09caf68B28b00c86b6F7B85B2',
-      pk: '',
       image: 'photo_2020-12-06 15.22.19.jpeg',
       pk: 'd3ff8376ef8f1ff24623698b3d3e88712ef02ef7b90823a4147241f759e19138',
       balance: {cc: 0, co2: 0},

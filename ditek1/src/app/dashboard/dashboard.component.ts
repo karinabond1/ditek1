@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit {
   @Output() updateBalances = new EventEmitter<string>();
   @Input() contract: any;
   @Input() contractAddress: any;
-  @Output() addTransaction = new EventEmitter<string>();
+  @Output() addTransaction = new EventEmitter<object>();
 
 
   constructor() {
@@ -53,6 +53,7 @@ export class DashboardComponent implements OnInit {
           // let infoo = await this.client.eth.sendSignedTransaction('0x' + tx.serialize().toString('hex'));
           const hash = await this.waitForHash('0x' + tx.serialize().toString('hex'), key, val.address);
           console.log(hash);
+          this.addTransaction.emit({event, hash});
           // tslint:disable-next-line:variable-name
           this.contract.methods.balanceOff(val.address).call().then((data_info) => {
             console.log('!!!!!', data_info);
