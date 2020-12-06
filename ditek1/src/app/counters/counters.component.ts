@@ -72,23 +72,18 @@ export class CountersComponent implements OnInit {
     this.counters_info.forEach((val: any, key: any) => {
       if ( key === number) {
         const randomNumber = Math.floor(Math.random() * (100 - 50) + 50);
-        val.ee += randomNumber;
-        val.co += randomNumber * val.greenCoef;
+
         this.dis[number].dis = true;
-        this.contract.methods.balanceOff('0x8B7f76fde966fAE325Ce75Ce8055f8433297319c').call().then(async (data) => {
+        this.contract.methods.balanceOff(val.address).call().then(async (data) => {
           console.log('get', data);
           console.log('data[0]', data[0]);
           console.log('data[1]', data[1]);
-
-          /*this.contract.methods.edit(val.ee, val.co).send({from: '0x8C7Fd7c3c0f6405FB474Af45588D5b99a7206Af2'}).then((dataEdit) => {
-            console.log('change', dataEdit);
-          });*/
+          val.ee = Math.floor(randomNumber + parseFloat(data[0]));
+          val.co = Math.floor((randomNumber * val.greenCoef) + parseFloat(data[1]));
           // tslint:disable-next-line:prefer-const
-          const privateKey = new Buffer('b7480e3041bfab6f07f5175a3b097841a89d68f60ffda7a08f0d03ae1697d8c5', 'hex');
+          const privateKey = new Buffer(val.pk, 'hex');
           const Tx = require('ethereumjs-tx').Transaction;
-          const gasPrice = await this.client.eth.getGasPrice();
-          const txCount = await this.client.eth.getTransactionCount('0x8C7Fd7c3c0f6405FB474Af45588D5b99a7206Af2');
-          console.log(txCount);
+          const txCount = await this.client.eth.getTransactionCount(val.address);
 
           const rawTx = {
             nonce: this.client.utils.toHex(txCount),
@@ -97,21 +92,15 @@ export class CountersComponent implements OnInit {
             gasLimit: this.client.utils.toHex(100000),
             gasPrice: this.client.utils.toHex(60e9), // 10 Gwei
             // from: '',
-            from: '0x8C7Fd7c3c0f6405FB474Af45588D5b99a7206Af2',
+            from: val.address,
             to: this.contractAddress,
-             value: '0x00',
+            value: '0x00',
             data: this.contract.methods.edit(val.ee, val.co).encodeABI(),
           };
-          const infobal = await this.contract.methods.balanceOff('0x8C7Fd7c3c0f6405FB474Af45588D5b99a7206Af2').call();
-          console.log('1');
           // tslint:disable-next-line:prefer-const
           let tx = new Tx(rawTx, { chain: 'ropsten' });
-          // console.log(tx);
 
-          console.log('2');
           tx.sign(privateKey);
-          console.log('3');
-          // let serializedTx = tx.serialize().toString('hex');
           console.log('0x' + tx.serialize().toString('hex'));
 
           // let infoo = await this.client.eth.sendSignedTransaction('0x' + tx.serialize().toString('hex'));
@@ -119,29 +108,11 @@ export class CountersComponent implements OnInit {
           console.log(hash);
           console.log('4');
 
+          // tslint:disable-next-line:variable-name
+          this.contract.methods.balanceOff(val.address).call().then((data_info) => {
+            console.log('!!!!!', data_info);
+          });
 
-
-          /*this.client.eth.sendSignedTransaction('0x' + serializedTx, function (err, txHash) {
-
-            if (txHash) {
-
-              console.log(txHash);
-
-            }
-
-            else if (err && err.message) {
-
-              console.log(err.message);
-
-            }
-
-            else {
-
-              console.log('Unable to sendRawTransaction');
-
-            }
-
-          });*/
         });
       }
     });
