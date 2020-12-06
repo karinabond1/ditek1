@@ -4,7 +4,8 @@
                   [contract]="contract" [client]="client"
                   [contractAddress]="contractAddress"
                   [customers]="customers"
-                  (updateBalances)="updateBalances()">
+                  (updateBalances)="updateBalances()"
+                  (addTransaction)="addTransaction($event)">
     </app-counters>
   </div>
   <div class="coll with-border">
@@ -13,7 +14,8 @@
                    [contract]="contract"
                    [client]="client"
                    [contractAddress]="contractAddress"
-                   (updateBalances)="updateBalances()"></app-dashboard>
+                   (updateBalances)="updateBalances()"
+                   (addTransaction)="addTransaction($event)"></app-dashboard>
   </div>
   <div class="coll with-border">
     <app-products [factory]="factory"
@@ -22,10 +24,13 @@
                   [contract]="contract"
                   [contractAddress]="contractAddress"
                   (updateBalances)="updateBalances()"
-                  (updateBalances)="updateBalances()"></app-products>
+                  (updateBalances)="updateBalances()"
+                  (addTransaction)="addTransaction($event)"></app-products>
   </div>
   <div class="coll">
-    <app-factory [transactions]="transactions"></app-factory>
+    <app-factory [tx]="tx"
+                 [factory]="factory"
+    ></app-factory>
   </div>
 </div>
 

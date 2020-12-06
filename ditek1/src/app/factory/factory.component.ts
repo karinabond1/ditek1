@@ -6,7 +6,8 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./factory.component.css']
 })
 export class FactoryComponent implements OnInit {
-  @Input() transactions: object[];
+  @Input() tx: object[];
+  @Input() factory: object[];
 
   constructor() {
   }

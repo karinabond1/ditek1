@@ -11,6 +11,8 @@ export class DashboardComponent implements OnInit {
   @Output() updateBalances = new EventEmitter<string>();
   @Input() contract: any;
   @Input() contractAddress: any;
+  @Output() addTransaction = new EventEmitter<string>();
+
 
   constructor() {
   }

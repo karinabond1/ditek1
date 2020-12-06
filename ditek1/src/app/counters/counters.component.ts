@@ -11,6 +11,7 @@ export class CountersComponent implements OnInit {
   constructor() { }
 
   @Output() updateBalances = new EventEmitter<string>();
+  @Output() addTransaction = new EventEmitter<object>();
   @Input() show11: boolean;
   @Input() show12: boolean;
   @Input() show21: boolean;
@@ -85,6 +86,7 @@ export class CountersComponent implements OnInit {
 
           // let infoo = await this.client.eth.sendSignedTransaction('0x' + tx.serialize().toString('hex'));
           const hash = await this.waitForHash('0x' + tx.serialize().toString('hex'), key);
+          this.addTransaction.emit({ event, hash });
           console.log(hash);
           // tslint:disable-next-line:variable-name
           this.contract.methods.balanceOff(val.address).call().then((data_info) => {
@@ -130,6 +132,7 @@ export class CountersComponent implements OnInit {
 
           // let infoo = await this.client.eth.sendSignedTransaction('0x' + tx.serialize().toString('hex'));
           const hash = await this.waitForHash('0x' + tx.serialize().toString('hex'), key);
+          this.addTransaction.emit({ event, hash });
           console.log(hash);
 
           /*val.ee = Math.round(randomNumber + parseFloat(data[0]));
