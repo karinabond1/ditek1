@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
       gen1: 0,
       gen2: 0,
       name: 'Запорожская станция',
-      image: 'solar-panel.jpg',
+      image: 'humster.gif',
       address: '0x8B7f76fde966fAE325Ce75Ce8055f8433297319c',
       pk: 'baf01ea5c8c013269bf0e4f34478641a1dc7d685e0c5a0292ae245af30d804bf'
     },
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
       gen1: 0,
       gen2: 0,
       name: 'Ботиевская станция',
-      image: 'humster.gif',
+      image: 'solar-panel.jpg',
       address: '0xEEFC7266B9C64cC09caf68B28b00c86b6F7B85B2',
       pk: 'd3ff8376ef8f1ff24623698b3d3e88712ef02ef7b90823a4147241f759e19138',
     }
@@ -60,12 +60,17 @@ export class AppComponent implements OnInit {
     {
       image: 'factory-1.png',
       name: 'ПАО «Славгородский арматурный завод»',
-      address: '0xf831195b528C08Ec6823d64C63098079CbeaD5aC',
-      pk: '1a9a842cbf37e91f3ced719035f56e1cf12686042ac0e9b9298e376f1c027eab',
+      address: '0xDbEA42531a17f9c442505aC42E8B214931497a66',
+      pk: '0f033bb595dda3eae4b6047b8177b844430290aca1bcf83ebb866f1d5314065f',
       privateKey: '',
       balance: {cc: 0, co2: 0},
       products: [
-        {name: 'Арматура', address: '', image: 'photo_2020-12-06 14.39.12.jpeg', balance: {cc: 0, co2: 0}},
+        {
+          name: 'Арматура',
+          address: '0x5e0969AF56c476CB1CCAf40dA094F849a3C2e2A0',
+          pk: '890262bb7fcd46db8343140f5b130cd407f4cb6ee354138cbd8f9a3349135e3c',
+          image: 'photo_2020-12-06 14.39.12.jpeg',
+          balance: {cc: 0, co2: 0}},
         // {name: 'Бетон', address: '', image: 'photo_2020-12-06 14.39.15.jpeg', balance: {cc: 0, co2: 0}}
       ]
     },
@@ -78,7 +83,12 @@ export class AppComponent implements OnInit {
       balance: {cc: 0, co2: 0},
       products: [
         // {name: 'Арматура', address: '', image: 'photo_2020-12-06 14.39.12.jpeg', balance: {cc: 0, co2: 0}},
-        {name: 'Бетон', address: '', image: 'photo_2020-12-06 14.39.15.jpeg', balance: {cc: 0, co2: 0}}
+        {
+          name: 'Бетон',
+          address: '0xB1a0B608C668570eE4F877298063EaDA9C0F991B',
+          pk: '6e22cf3bea2555fd5bf6fcb979f5288fa445ea1d208d330622ae588a6a57717c',
+          image: 'photo_2020-12-06 14.39.15.jpeg',
+          balance: {cc: 0, co2: 0}}
       ]
     },
   ];
